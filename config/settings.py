@@ -95,7 +95,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-url = 'postgres://python_xy0s_user:tirKEY8mlVKzohsG6nIkBhgoylybHomJ@dpg-cnot4umct0pc73cr92og-a.oregon-postgres.render.com/python_xy0s'
+url = 'postgres://python_xy0s_user:tirKEY8mlVKzohsG6nIkBhgoylybHomJ@dpg-cnot4umct0pc73cr92og-a/python_xy0s'
 database_url = os.environ.get('DATABASE_URL', url)
 DATABASES['default'] = dj_database_url.parse(database_url)
 
