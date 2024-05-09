@@ -21,16 +21,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-9^&i+si%_2c)_0c$v__$o9r6_m@t8ioqz88=&mk&suubap$u#r'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
+DEBUG = True
+# DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
-ALLOWED_HOSTS = HOSTS = os.environ.get('ALLOWED_HOSTS')
-ALLOWED_HOSTS = HOSTS.split(' ') if HOSTS else []
-
-
+ALLOWED_HOSTS = ['*']
+# HOSTS = os.environ.get('ALLOWED_HOSTS')
+# ALLOWED_HOSTS = HOSTS.split(' ') if HOSTS else []
 # Application definition
+
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -39,33 +41,41 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog',
-    'rest_framework',
+    'blog',  # new
+    'rest_framework',  # new
     'drf_yasg',
-    'corsheaders'
+    "corsheaders"
+
 ]
+
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
-
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.AllowAny',
     ]
 }
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    "corsheaders.middleware.CorsMiddleware",  # new
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware'
 ]
 
-
-
 ROOT_URLCONF = 'config.urls'
+
+CORS_ALLOWED_ORIGINS = (
+    "http://localhost:3000",
+    "http://localhost:8000",
+)
+
 
 TEMPLATES = [
     {
@@ -82,6 +92,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
@@ -133,22 +144,22 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR / 'static')
-STATICFILES_DIRS = [BASE_DIR / 'blog/static']
+STATICFILES_DIRS = [BASE_DIR]
 
 MEDIA_URL = '/media/'  # new
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # new
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
