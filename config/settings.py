@@ -95,6 +95,16 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': "back472_blog",
+        "USER": "back472_blog_user",
+        "PASSWORD": "django-insecure-9^&i+si%_2c)_0c$v__$o9r6_m@t8ioqz88=&mk&suubap$u#r",
+        "HOST": "postgres://python_xy0s_user:tirKEY8mlVKzohsG6nIkBhgoylybHomJ@dpg-cnot4umct0pc73cr92og-a/python_xy0s",
+        "PORT": 5432
+    }
+}
 url = 'postgres://python_xy0s_user:tirKEY8mlVKzohsG6nIkBhgoylybHomJ@dpg-cnot4umct0pc73cr92og-a/python_xy0s'
 database_url = os.environ.get('DATABASE_URL', url)
 DATABASES['default'] = dj_database_url.parse(database_url)
