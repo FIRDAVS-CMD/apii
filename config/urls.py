@@ -20,3 +20,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # new
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # new
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)  # new
